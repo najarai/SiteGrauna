@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --color-ink: #0a0908;
+  --color-ink-soft: #141210;
+  --color-cream: #f3eee6;
+  --color-cream-dim: #cfc4b6;
+  --color-terra: #b68a6b;
+  --color-terra-hot: #c9956f;
+  --color-sand: #8a7a6a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-terra) 55%, transparent);
+  color: var(--color-cream);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.canvas-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.scroll-root {
+  position: relative;
+  z-index: 1;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-cream) 12%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: var(--color-terra);
+  color: var(--color-ink);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-terra-hot);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px color-mix(in srgb, var(--color-terra) 35%, transparent);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-cream) 28%, transparent);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-cream);
+  background: color-mix(in srgb, var(--color-cream) 6%, transparent);
+  transform: translateY(-2px);
+}
