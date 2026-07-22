@@ -13,7 +13,7 @@ export function Contact() {
           className="glass relative overflow-hidden rounded-[28px] px-6 py-14 md:px-14 md:py-20"
         >
           <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[color-mix(in_srgb,var(--color-terra)_25%,transparent)] blur-3xl" />
-          <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
             <div>
               <p className="mb-3 text-[0.7rem] tracking-[0.28em] uppercase text-[var(--color-terra)]">
                 Contato
@@ -37,6 +37,30 @@ export function Contact() {
             </div>
 
             <div className="space-y-5 text-sm text-[var(--color-cream-dim)]">
+              <div>
+                <p className="mb-2 text-[0.65rem] tracking-[0.2em] uppercase text-[var(--color-sand)]">
+                  Localização
+                </p>
+                <div className="overflow-hidden rounded-2xl ring-1 ring-white/10">
+                  <iframe
+                    title="Mapa — Graúna Moda"
+                    src={SITE.mapsEmbedUrl}
+                    className="aspect-[4/3] h-auto w-full border-0 grayscale-[25%] contrast-[1.05]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
+                <a
+                  href={SITE.mapsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-2 text-[0.68rem] tracking-[0.16em] uppercase text-[var(--color-terra)] transition hover:text-[var(--color-cream)]"
+                >
+                  Abrir no Google Maps
+                  <span aria-hidden>↗</span>
+                </a>
+              </div>
               <div>
                 <p className="mb-1 text-[0.65rem] tracking-[0.2em] uppercase text-[var(--color-sand)]">
                   Endereço

@@ -9,6 +9,10 @@ export const SITE = {
   instagramHandle: "@graunamoda",
   hoursNote: "Vitrines às terças e sextas",
   serviceNote: "Atendimento exclusivamente por WhatsApp",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Rua+Professor+Teixeira,+1480,+Centro,+Santa+Maria,+RS",
+  mapsEmbedUrl:
+    "https://maps.google.com/maps?q=Rua%20Professor%20Teixeira%2C%201480%2C%20Centro%2C%20Santa%20Maria%2C%20RS&z=16&output=embed",
 } as const;
 
 /** Catálogo atual — sem capa ZINCO (coleção antiga). */
