@@ -27,3 +27,6 @@ dist-ssr
 referencias/_frames/
 referencias/_catalog_work/
 
+
+.vercel
+.env*
