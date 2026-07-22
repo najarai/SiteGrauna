@@ -1,11 +1,10 @@
-import { AnimatePresence, motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { SITE } from "../data/site";
 
 const SESSION_KEY = "grauna-intro-seen";
-const HOLD_MS = 900;
 
-type Phase = "load" | "brand" | "ready" | "exit";
+type Phase = "load" | "brand" | "exit";
 
 function shouldSkipIntro() {
   if (typeof window === "undefined") return true;
@@ -21,12 +20,6 @@ export function Intro({ onComplete }: { onComplete: () => void }) {
   const [visible, setVisible] = useState(() => !shouldSkipIntro());
   const [phase, setPhase] = useState<Phase>("load");
   const [loadProgress, setLoadProgress] = useState(0);
-  const holding = useRef(false);
-  const holdProgress = useMotionValue(0);
-  const holdPct = useTransform(holdProgress, [0, 1], ["0%", "100%"]);
-  const ringCircumference = 2 * Math.PI * 64;
-  const ringOffset = useTransform(holdProgress, [0, 1], [ringCircumference, 0]);
-  const holdAnim = useRef<ReturnType<typeof animate> | null>(null);
 
   useEffect(() => {
     if (!visible) {
@@ -38,8 +31,18 @@ export function Intro({ onComplete }: { onComplete: () => void }) {
     document.body.style.overflow = "hidden";
 
     let raf = 0;
+    let brandTimer = 0;
     const started = performance.now();
-    const duration = 1600;
+    const duration = 1400;
+
+    const finish = () => {
+      setPhase("exit");
+      try {
+        sessionStorage.setItem(SESSION_KEY, "1");
+      } catch {
+        /* ignore */
+      }
+    };
 
     const tick = (now: number) => {
       const t = Math.min(1, (now - started) / duration);
@@ -49,52 +52,22 @@ export function Intro({ onComplete }: { onComplete: () => void }) {
         raf = requestAnimationFrame(tick);
       } else {
         setPhase("brand");
-        window.setTimeout(() => setPhase("ready"), 1100);
+        brandTimer = window.setTimeout(finish, 1600);
       }
     };
     raf = requestAnimationFrame(tick);
 
     return () => {
       cancelAnimationFrame(raf);
+      window.clearTimeout(brandTimer);
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [visible, onComplete]);
 
-  const finish = () => {
-    if (phase === "exit") return;
-    setPhase("exit");
-    try {
-      sessionStorage.setItem(SESSION_KEY, "1");
-    } catch {
-      /* ignore */
-    }
-  };
-
-  const startHold = () => {
-    if (phase !== "ready" || holding.current) return;
-    holding.current = true;
-    holdAnim.current?.stop();
-    holdAnim.current = animate(holdProgress, 1, {
-      duration: HOLD_MS / 1000,
-      ease: "easeInOut",
-      onComplete: () => {
-        if (holding.current) finish();
-      },
-    });
-  };
-
-  const endHold = () => {
-    if (!holding.current) return;
-    holding.current = false;
-    holdAnim.current?.stop();
-    holdAnim.current = animate(holdProgress, 0, {
-      duration: 0.35,
-      ease: "easeOut",
-    });
-  };
-
   if (!visible && phase !== "exit") return null;
+
+  const unveiled = phase !== "load";
 
   return (
     <AnimatePresence
@@ -108,104 +81,88 @@ export function Intro({ onComplete }: { onComplete: () => void }) {
       {phase !== "exit" ? (
         <motion.div
           key="intro"
-          className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-[var(--color-ink)] px-6"
+          className="fixed inset-0 z-[60] flex flex-col items-center justify-center overflow-hidden bg-[var(--color-ink)] px-6"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: "-8%", filter: "blur(8px)" }}
-          transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
-          onPointerDown={startHold}
-          onPointerUp={endHold}
-          onPointerLeave={endHold}
-          onPointerCancel={endHold}
-          onContextMenu={(e) => e.preventDefault()}
-          style={{ touchAction: "none", userSelect: "none" }}
+          exit={{ opacity: 0, filter: "blur(10px)" }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,color-mix(in_srgb,var(--color-terra)_14%,transparent),transparent_58%)]" />
-
-          {/* Soft editorial rings — Resn-like motion, Graúna palette */}
+          {/* Soft vertical wash — no circular motifs */}
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,color-mix(in_srgb,var(--color-terra)_10%,transparent)_42%,transparent_100%)]" />
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={
-              phase === "load"
-                ? { opacity: 0.15, scale: 0.85 }
-                : { opacity: 0.45, scale: 1, rotate: 360 }
-            }
-            transition={
-              phase === "load"
-                ? { duration: 0.8 }
-                : { rotate: { duration: 28, ease: "linear", repeat: Infinity }, opacity: { duration: 1 }, scale: { duration: 1.1 } }
-            }
-          >
-            <svg width="280" height="280" viewBox="0 0 280 280" className="text-[var(--color-cream-dim)]">
-              <circle cx="140" cy="140" r="108" fill="none" stroke="currentColor" strokeWidth="0.6" opacity="0.35" />
-              <circle cx="140" cy="140" r="78" fill="none" stroke="var(--color-terra)" strokeWidth="0.7" opacity="0.55" strokeDasharray="4 10" />
-              <path
-                d="M140 28 L148 52 L140 46 L132 52 Z M252 140 L228 148 L234 140 L228 132 Z M140 252 L132 228 L140 234 L148 228 Z M28 140 L52 132 L46 140 L52 148 Z"
-                fill="currentColor"
-                opacity="0.55"
-              />
-            </svg>
-          </motion.div>
+            className="pointer-events-none absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[color-mix(in_srgb,var(--color-cream)_22%,transparent)] to-transparent"
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: unveiled ? 1 : 0.35, opacity: unveiled ? 0.7 : 0.25 }}
+            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          />
 
-          <motion.div
+          {/* Editorial corner marks */}
+          <motion.span
             aria-hidden
-            className="pointer-events-none absolute"
-            initial={{ opacity: 0 }}
-            animate={phase === "load" ? { opacity: 0 } : { opacity: 0.3, rotate: -360 }}
-            transition={{ rotate: { duration: 40, ease: "linear", repeat: Infinity }, opacity: { duration: 1.2, delay: 0.2 } }}
-          >
-            <svg width="360" height="360" viewBox="0 0 360 360">
-              <circle
-                cx="180"
-                cy="180"
-                r="150"
-                fill="none"
-                stroke="color-mix(in srgb, var(--color-cream) 28%, transparent)"
-                strokeWidth="0.5"
-                strokeDasharray="1 14"
-              />
-            </svg>
-          </motion.div>
+            className="pointer-events-none absolute left-6 top-6 h-10 w-10 border-l border-t border-[color-mix(in_srgb,var(--color-cream)_28%,transparent)] md:left-10 md:top-10"
+            initial={{ opacity: 0, x: -8, y: -8 }}
+            animate={{ opacity: unveiled ? 1 : 0.35, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+          />
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute right-6 top-6 h-10 w-10 border-r border-t border-[color-mix(in_srgb,var(--color-cream)_28%,transparent)] md:right-10 md:top-10"
+            initial={{ opacity: 0, x: 8, y: -8 }}
+            animate={{ opacity: unveiled ? 1 : 0.35, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute bottom-6 left-6 h-10 w-10 border-b border-l border-[color-mix(in_srgb,var(--color-cream)_28%,transparent)] md:bottom-10 md:left-10"
+            initial={{ opacity: 0, x: -8, y: 8 }}
+            animate={{ opacity: unveiled ? 1 : 0.35, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
+          />
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute bottom-6 right-6 h-10 w-10 border-b border-r border-[color-mix(in_srgb,var(--color-cream)_28%,transparent)] md:bottom-10 md:right-10"
+            initial={{ opacity: 0, x: 8, y: 8 }}
+            animate={{ opacity: unveiled ? 1 : 0.35, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
 
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="relative mb-8 flex h-28 w-28 items-center justify-center md:h-32 md:w-32">
-              {phase !== "load" && (
-                <svg className="pointer-events-none absolute inset-[-10px]" viewBox="0 0 140 140" aria-hidden>
-                  <circle
-                    cx="70"
-                    cy="70"
-                    r="64"
-                    fill="none"
-                    stroke="color-mix(in srgb, var(--color-cream) 18%, transparent)"
-                    strokeWidth="1"
-                  />
-                  <motion.circle
-                    cx="70"
-                    cy="70"
-                    r="64"
-                    fill="none"
-                    stroke="var(--color-terra)"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeDasharray={ringCircumference}
-                    style={{ strokeDashoffset: ringOffset, rotate: -90, transformOrigin: "70px 70px" }}
-                  />
-                </svg>
-              )}
-
-              <motion.img
-                src="/logo.png"
-                alt=""
-                className="h-20 w-20 rounded-full object-cover ring-1 ring-white/20 md:h-24 md:w-24"
-                initial={{ opacity: 0, scale: 0.82 }}
-                animate={{ opacity: 1, scale: phase === "load" ? 0.92 : 1 }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          <div className="relative z-10 flex w-full max-w-lg flex-col items-center">
+            {/* Horizontal rules framing the logo */}
+            <motion.div
+              aria-hidden
+              className="mb-8 flex w-full items-center gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7 }}
+            >
+              <motion.span
+                className="h-px flex-1 origin-right bg-[color-mix(in_srgb,var(--color-cream)_30%,transparent)]"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
               />
-            </div>
+              <span className="text-[0.58rem] tracking-[0.32em] uppercase text-[var(--color-sand)]">
+                {SITE.city}
+              </span>
+              <motion.span
+                className="h-px flex-1 origin-left bg-[color-mix(in_srgb,var(--color-cream)_30%,transparent)]"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </motion.div>
+
+            <motion.img
+              src="/logo.png"
+              alt=""
+              className="h-24 w-24 object-cover md:h-28 md:w-28"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0, scale: unveiled ? 1 : 0.96 }}
+              transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+            />
 
             {phase === "load" ? (
-              <div className="w-40">
+              <div className="mt-10 w-44">
                 <div className="h-px w-full overflow-hidden bg-white/10">
                   <motion.div
                     className="h-full bg-[var(--color-terra)]"
@@ -215,51 +172,23 @@ export function Intro({ onComplete }: { onComplete: () => void }) {
               </div>
             ) : (
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                className="text-center"
+                className="mt-10 text-center"
               >
-                <p className="font-display text-[clamp(2.6rem,8vw,4.8rem)] leading-[0.92] tracking-[0.04em]">
+                <p className="font-display text-[clamp(2.8rem,8vw,5rem)] leading-[0.92] tracking-[0.04em]">
                   Graúna
                   <span className="mt-1 block italic text-[var(--color-cream-dim)]">Moda</span>
                 </p>
-                <p className="mt-5 text-[0.68rem] tracking-[0.28em] uppercase text-[var(--color-sand)]">
-                  {SITE.tagline} · {SITE.city}
-                </p>
-              </motion.div>
-            )}
-          </div>
-
-          <div className="absolute inset-x-0 bottom-10 flex flex-col items-center gap-4 px-6 md:bottom-14">
-            {phase === "ready" && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7 }}
-                className="flex w-full max-w-xs flex-col items-center gap-3"
-              >
-                <p className="text-[0.68rem] tracking-[0.26em] uppercase text-[var(--color-cream-dim)]">
-                  Segure para entrar
-                </p>
-                <div className="h-px w-full overflow-hidden bg-white/10">
-                  <motion.div className="h-full bg-[var(--color-cream)]" style={{ width: holdPct }} />
+                <div className="mx-auto mt-6 flex max-w-[14rem] items-center gap-3">
+                  <span className="h-px flex-1 bg-[color-mix(in_srgb,var(--color-terra)_70%,transparent)]" />
+                  <p className="text-[0.65rem] tracking-[0.28em] uppercase text-[var(--color-sand)]">
+                    {SITE.tagline}
+                  </p>
+                  <span className="h-px flex-1 bg-[color-mix(in_srgb,var(--color-terra)_70%,transparent)]" />
                 </div>
               </motion.div>
-            )}
-
-            {(phase === "brand" || phase === "ready") && (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  finish();
-                }}
-                onPointerDown={(e) => e.stopPropagation()}
-                className="text-[0.62rem] tracking-[0.2em] uppercase text-[var(--color-sand)] transition hover:text-[var(--color-cream-dim)]"
-              >
-                Pular intro
-              </button>
             )}
           </div>
         </motion.div>
