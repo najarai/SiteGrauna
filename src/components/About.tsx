@@ -42,15 +42,15 @@ export function About() {
           className="relative overflow-hidden rounded-[2px]"
         >
           <img
-            src="/looks/look-05.jpg"
-            alt="Look Graúna Moda em cenário tropical"
+            src="/looks/look-06.jpg"
+            alt="Blusa azul Graúna Moda"
             className="aspect-[4/5] w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/70 via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">
             <p className="font-display text-3xl italic">Presença & elegância</p>
             <p className="mt-1 text-[0.7rem] tracking-[0.2em] uppercase text-[var(--color-cream-dim)]">
-              Coleção primavera verão
+              Novidades da vitrine
             </p>
           </div>
         </motion.div>

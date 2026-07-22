@@ -34,9 +34,9 @@ function LookCard({
         className="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-[1.04]"
       />
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4 opacity-0 transition duration-500 group-hover:opacity-100">
-        <span className="font-display text-2xl italic">Look {look.id}</span>
+        <span className="font-display text-2xl italic">{look.label}</span>
         <span className="text-[0.65rem] tracking-[0.2em] uppercase text-[var(--color-cream-dim)]">
-          PV 2025
+          Novidades
         </span>
       </figcaption>
     </motion.figure>
@@ -53,11 +53,11 @@ export function Lookbook() {
               Lookbook
             </p>
             <h2 className="font-display text-4xl md:text-6xl">
-              Coleção <span className="italic text-[var(--color-cream-dim)]">primavera verão</span>
+              Novidades <span className="italic text-[var(--color-cream-dim)]">da vitrine</span>
             </h2>
           </div>
           <p className="max-w-md text-sm leading-relaxed text-[var(--color-cream-dim)] md:text-base">
-            Uma seleção dos looks apresentados nas vitrines da Graúna. Só mostruário —
+            Looks recentes do catálogo — Morena Rosa, Maria Valentina e mais. Só mostruário:
             escolha o que ama e fale conosco no WhatsApp.
           </p>
         </div>
