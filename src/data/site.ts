@@ -25,7 +25,7 @@ export const LOOKS = [
   { id: 11, src: "/looks/look-11.jpg", alt: "Vestido Estampa Zebra — Graúna Moda", label: "Vestido" },
   { id: 12, src: "/looks/look-12.jpg", alt: "Blusa Marrom — Graúna Moda", label: "Blusa" },
   { id: 13, src: "/looks/look-13.jpg", alt: "Blusa Marrom — Graúna Moda", label: "Blusa" },
-  { id: 14, src: "/looks/look-14.jpg", alt: "Campanha Morena Rosa — Graúna Moda", label: "Campanha" },
+  { id: 14, src: "/looks/capa-morena-rosa.jpg", alt: "Campanha Morena Rosa — Graúna Moda", label: "Campanha" },
   { id: 15, src: "/looks/look-15.jpg", alt: "Campanha Maria Valentina — Graúna Moda", label: "Campanha" },
 ] as const;
 
