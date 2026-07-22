@@ -42,8 +42,8 @@ export function About() {
           className="relative overflow-hidden rounded-[2px]"
         >
           <img
-            src="/looks/look-06.jpg"
-            alt="Blusa azul Graúna Moda"
+            src="/looks/blusa-21378-azul.jpg"
+            alt="Conjunto azul Graúna Moda"
             className="aspect-[4/5] w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/70 via-transparent to-transparent" />

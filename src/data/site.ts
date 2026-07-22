@@ -11,22 +11,23 @@ export const SITE = {
   serviceNote: "Atendimento exclusivamente por WhatsApp",
 } as const;
 
+/** Catálogo atual — sem capa ZINCO (coleção antiga). */
 export const LOOKS = [
   { id: 1, src: "/looks/capa-morena-rosa.jpg", alt: "Campanha Morena Rosa — Graúna Moda", label: "Campanha" },
-  { id: 2, src: "/looks/look-01.jpg", alt: "Blusa Off White — Graúna Moda", label: "Blusa" },
-  { id: 3, src: "/looks/look-02.jpg", alt: "Blusa Bege/marrom Est. Tuflower — Graúna Moda", label: "Blusa" },
-  { id: 4, src: "/looks/look-03.jpg", alt: "Vestido Bege/marrom Est. Tuflower — Graúna Moda", label: "Vestido" },
-  { id: 5, src: "/looks/look-04.jpg", alt: "Macacão Bege — Graúna Moda", label: "Macacão" },
-  { id: 6, src: "/looks/look-05.jpg", alt: "Vestido Off White — Graúna Moda", label: "Vestido" },
-  { id: 7, src: "/looks/look-06.jpg", alt: "Blusa Azul — Graúna Moda", label: "Blusa" },
-  { id: 8, src: "/looks/look-07.jpg", alt: "Calça Estampa Arado — Graúna Moda", label: "Calça" },
-  { id: 9, src: "/looks/look-08.jpg", alt: "Camisa Estampa Arado — Graúna Moda", label: "Camisa" },
-  { id: 10, src: "/looks/look-09.jpg", alt: "Vestido Marrom — Graúna Moda", label: "Vestido" },
-  { id: 11, src: "/looks/look-10.jpg", alt: "Vestido Bege/bordô — Graúna Moda", label: "Vestido" },
-  { id: 12, src: "/looks/look-11.jpg", alt: "Vestido Estampa Zebra — Graúna Moda", label: "Vestido" },
-  { id: 13, src: "/looks/look-12.jpg", alt: "Blusa Marrom — Graúna Moda", label: "Blusa" },
-  { id: 14, src: "/looks/look-13.jpg", alt: "Blusa Marrom — Graúna Moda", label: "Blusa" },
-  { id: 15, src: "/looks/look-15.jpg", alt: "Campanha Maria Valentina — Graúna Moda", label: "Campanha" },
+  { id: 2, src: "/looks/capa-maria-valentina.jpg", alt: "Campanha Maria Valentina — Graúna Moda", label: "Campanha" },
+  { id: 3, src: "/looks/vestido-21417-off-white.jpg", alt: "Vestido Off White — Graúna Moda", label: "Vestido" },
+  { id: 4, src: "/looks/vestido-21354-marrom.jpg", alt: "Vestido Marrom — Graúna Moda", label: "Vestido" },
+  { id: 5, src: "/looks/vestido-21321-bege-bordo.jpg", alt: "Vestido Bege/bordô — Graúna Moda", label: "Vestido" },
+  { id: 6, src: "/looks/vestido-21383-zebra.jpg", alt: "Vestido Estampa Zebra — Graúna Moda", label: "Vestido" },
+  { id: 7, src: "/looks/vestido-10281-tuflower.jpg", alt: "Vestido Est. Tuflower — Graúna Moda", label: "Vestido" },
+  { id: 8, src: "/looks/macacao-21353-bege.jpg", alt: "Macacão Bege — Graúna Moda", label: "Macacão" },
+  { id: 9, src: "/looks/blusa-21378-azul.jpg", alt: "Conjunto Azul — Graúna Moda", label: "Conjunto" },
+  { id: 10, src: "/looks/blusa-10261-off-white.jpg", alt: "Blusa Off White — Graúna Moda", label: "Blusa" },
+  { id: 11, src: "/looks/blusa-10279-tuflower.jpg", alt: "Blusa Est. Tuflower — Graúna Moda", label: "Blusa" },
+  { id: 12, src: "/looks/blusa-10306-marrom.jpg", alt: "Macacão Verde — Graúna Moda", label: "Macacão" },
+  { id: 13, src: "/looks/blusa-10307-marrom.jpg", alt: "Conjunto Verde — Graúna Moda", label: "Conjunto" },
+  { id: 14, src: "/looks/camisa-21401-arado.jpg", alt: "Camisa Estampa Arado — Graúna Moda", label: "Camisa" },
+  { id: 15, src: "/looks/calca-21242-arado.jpg", alt: "Calça Estampa Arado — Graúna Moda", label: "Calça" },
 ] as const;
 
 export const BRANDS = [
