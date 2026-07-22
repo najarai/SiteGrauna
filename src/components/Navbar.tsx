@@ -8,11 +8,11 @@ const links = [
   { href: "#contato", label: "Contato" },
 ];
 
-export function Navbar() {
+export function Navbar({ ready = true }: { ready?: boolean }) {
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      animate={ready ? { y: 0, opacity: 1 } : { y: -24, opacity: 0 }}
       transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-0 inset-x-0 z-30"
     >
