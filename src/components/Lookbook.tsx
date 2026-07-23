@@ -14,24 +14,33 @@ function LookCard({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? 40 : -30, index % 2 === 0 ? -40 : 30]);
-  const scale = useTransform(scrollYProgress, [0, 0.4, 1], [0.94, 1, 0.97]);
+  // Translate only — CSS scale softens photos when the browser resamples them.
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [index % 2 === 0 ? 28 : -20, index % 2 === 0 ? -28 : 20],
+  );
 
   return (
     <motion.figure
       ref={ref}
-      style={{ y, scale }}
-      initial={{ opacity: 0, y: 48 }}
+      style={{ y }}
+      initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.06 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.05 }}
       className="group relative overflow-hidden rounded-[2px]"
     >
       <img
         src={look.src}
         alt={look.alt}
-        loading="lazy"
-        className="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+        width={2400}
+        height={3411}
+        loading={index < 6 ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={index < 4 ? "high" : "auto"}
+        className="aspect-[3/4] w-full object-cover"
+        style={{ imageRendering: "auto" }}
       />
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4 opacity-0 transition duration-500 group-hover:opacity-100">
         <span className="font-display text-2xl italic">{look.label}</span>
