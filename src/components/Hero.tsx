@@ -7,8 +7,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
       id="topo"
       className="relative flex min-h-[100svh] flex-col justify-end px-5 pb-16 pt-28 md:px-8 md:pb-24"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#0a0908_72%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[var(--color-ink)] to-transparent" />
+      <div className="hero-veil" aria-hidden />
 
       <div className="relative mx-auto w-full max-w-7xl">
         <motion.p

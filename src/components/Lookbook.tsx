@@ -52,7 +52,8 @@ function LookCard({
 export function Lookbook() {
   return (
     <section id="colecao" className="relative px-5 py-24 md:px-8 md:py-32">
-      <div className="mx-auto max-w-7xl">
+      <div className="section-wash section-wash--ink" aria-hidden />
+      <div className="relative mx-auto max-w-7xl">
         <div className="mb-14 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="mb-3 text-[0.7rem] tracking-[0.28em] uppercase text-[var(--color-terra)]">

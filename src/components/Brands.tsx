@@ -4,7 +4,7 @@ import { BRANDS } from "../data/site";
 export function Brands() {
   return (
     <section id="marcas" className="relative px-5 py-24 md:px-8 md:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,color-mix(in_srgb,var(--color-terra)_12%,transparent),transparent_55%)]" />
+      <div className="section-wash section-wash--terra" aria-hidden />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-14 max-w-2xl">
           <p className="mb-3 text-[0.7rem] tracking-[0.28em] uppercase text-[var(--color-terra)]">

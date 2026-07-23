@@ -4,7 +4,8 @@ import { SITE } from "../data/site";
 export function Contact() {
   return (
     <section id="contato" className="relative px-5 py-24 md:px-8 md:py-32">
-      <div className="mx-auto max-w-7xl">
+      <div className="section-wash section-wash--ink" aria-hidden />
+      <div className="relative mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -4,7 +4,8 @@ import { SITE } from "../data/site";
 export function About() {
   return (
     <section id="sobre" className="relative px-5 py-24 md:px-8 md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div className="section-wash section-wash--terra" aria-hidden />
+      <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
           <p className="mb-3 text-[0.7rem] tracking-[0.28em] uppercase text-[var(--color-terra)]">
             A loja

@@ -54,10 +54,9 @@ a {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  /* Behind photos — overlay grain softens every image */
-  z-index: 0;
-  opacity: 0.03;
-  mix-blend-mode: soft-light;
+  z-index: 40;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -70,6 +69,84 @@ a {
 .scroll-root {
   position: relative;
   z-index: 1;
+}
+
+/* Soft section washes — feathered edges so WebGL atmosphere never hits a hard seam */
+.hero-veil {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 115% 80% at 50% 30%,
+    transparent 0%,
+    transparent 38%,
+    color-mix(in srgb, var(--color-ink) 58%, transparent) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 48%,
+    rgba(0, 0, 0, 0.55) 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 48%,
+    rgba(0, 0, 0, 0.55) 72%,
+    transparent 100%
+  );
+}
+
+.section-wash {
+  pointer-events: none;
+  position: absolute;
+  inset: -7rem 0;
+  z-index: 0;
+}
+
+.section-wash--terra {
+  background: radial-gradient(
+    ellipse 95% 58% at 48% 42%,
+    color-mix(in srgb, var(--color-terra) 16%, transparent) 0%,
+    transparent 64%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 22%,
+    #000 78%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 22%,
+    #000 78%,
+    transparent 100%
+  );
+}
+
+.section-wash--ink {
+  background: radial-gradient(
+    ellipse 90% 50% at 50% 50%,
+    color-mix(in srgb, var(--color-ink-soft) 45%, transparent) 0%,
+    transparent 70%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
 }
 
 .glass {
