@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { LOOKS } from "../data/site";
 
 function LookCard({
@@ -8,25 +9,35 @@ function LookCard({
   look: (typeof LOOKS)[number];
   index: number;
 }) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  // Translate only — CSS scale softens photos when the browser resamples them.
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [index % 2 === 0 ? 28 : -20, index % 2 === 0 ? -28 : 20],
+  );
+
   return (
     <motion.figure
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.55, ease: "easeOut", delay: (index % 3) * 0.04 }}
-      className="group relative overflow-hidden rounded-[2px] bg-[var(--color-ink-soft)]"
+      ref={ref}
+      style={{ y }}
+      initial={{ opacity: 0, y: 36 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.05 }}
+      className="group relative overflow-hidden rounded-[2px]"
     >
-      {/* No CSS transform on the <img> — transforms force soft GPU resampling */}
       <img
         src={look.src}
         alt={look.alt}
-        width={2400}
-        height={3411}
         loading={index < 6 ? "eager" : "lazy"}
         decoding="async"
         fetchPriority={index < 4 ? "high" : "auto"}
-        draggable={false}
-        className="aspect-[3/4] h-auto w-full object-cover"
+        className="w-full h-auto"
       />
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4 opacity-0 transition duration-500 group-hover:opacity-100">
         <span className="font-display text-2xl italic">{look.label}</span>
@@ -40,7 +51,7 @@ function LookCard({
 
 export function Lookbook() {
   return (
-    <section id="colecao" className="relative z-[1] px-5 py-24 md:px-8 md:py-32">
+    <section id="colecao" className="relative px-5 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between">
           <div>

@@ -15,23 +15,23 @@ export const SITE = {
     "https://maps.google.com/maps?q=Rua%20Professor%20Teixeira%2C%201480%2C%20Centro%2C%20Santa%20Maria%2C%20RS&z=16&output=embed",
 } as const;
 
-/** Recortes HQ (~2400px) — mesma nitidez dos arquivos em referencias/. */
+/** Bit-exact from referencias/extraidos_fieis — no recompress/resize. */
 export const LOOKS = [
-  { id: 1, src: "/looks/capa-morena-rosa-origem.jpg", alt: "Campanha Morena Rosa — Graúna Moda", label: "Campanha" },
-  { id: 2, src: "/looks/capa-maria-valentina-origem.jpg", alt: "Campanha Maria Valentina — Graúna Moda", label: "Campanha" },
-  { id: 3, src: "/looks/vestido-21417-off-white-origem.jpg", alt: "Vestido Off White — Graúna Moda", label: "Vestido" },
-  { id: 4, src: "/looks/vestido-21354-marrom-origem.jpg", alt: "Vestido Marrom — Graúna Moda", label: "Vestido" },
-  { id: 5, src: "/looks/vestido-21321-bege-bordo-origem.jpg", alt: "Vestido Bege/bordô — Graúna Moda", label: "Vestido" },
-  { id: 6, src: "/looks/vestido-21383-zebra-origem.jpg", alt: "Vestido Estampa Zebra — Graúna Moda", label: "Vestido" },
-  { id: 7, src: "/looks/vestido-10281-tuflower-origem.jpg", alt: "Vestido Est. Tuflower — Graúna Moda", label: "Vestido" },
-  { id: 8, src: "/looks/macacao-21353-bege-origem.jpg", alt: "Macacão Bege — Graúna Moda", label: "Macacão" },
-  { id: 9, src: "/looks/blusa-21378-azul-origem.jpg", alt: "Conjunto Azul — Graúna Moda", label: "Conjunto" },
-  { id: 10, src: "/looks/blusa-10261-off-white-origem.jpg", alt: "Blusa Off White — Graúna Moda", label: "Blusa" },
-  { id: 11, src: "/looks/blusa-10279-tuflower-origem.jpg", alt: "Blusa Est. Tuflower — Graúna Moda", label: "Blusa" },
-  { id: 12, src: "/looks/blusa-10306-marrom-origem.jpg", alt: "Macacão Verde — Graúna Moda", label: "Macacão" },
-  { id: 13, src: "/looks/blusa-10307-marrom-origem.jpg", alt: "Conjunto Verde — Graúna Moda", label: "Conjunto" },
-  { id: 14, src: "/looks/camisa-21401-arado-origem.jpg", alt: "Camisa Estampa Arado — Graúna Moda", label: "Camisa" },
-  { id: 15, src: "/looks/calca-21242-arado-origem.jpg", alt: "Calça Estampa Arado — Graúna Moda", label: "Calça" },
+  { id: 1, src: "/looks/capa-morena-rosa-exato.jpg", alt: "Campanha Morena Rosa — Graúna Moda", label: "Campanha" },
+  { id: 2, src: "/looks/capa-maria-valentina-exato.jpg", alt: "Campanha Maria Valentina — Graúna Moda", label: "Campanha" },
+  { id: 3, src: "/looks/vestido-21417-off-white-exato.jpg", alt: "Vestido Off White — Graúna Moda", label: "Vestido" },
+  { id: 4, src: "/looks/vestido-21354-marrom-exato.jpg", alt: "Vestido Marrom — Graúna Moda", label: "Vestido" },
+  { id: 5, src: "/looks/vestido-21321-bege-bordo-exato.jpg", alt: "Vestido Bege/bordô — Graúna Moda", label: "Vestido" },
+  { id: 6, src: "/looks/vestido-21383-zebra-exato.jpg", alt: "Vestido Estampa Zebra — Graúna Moda", label: "Vestido" },
+  { id: 7, src: "/looks/vestido-10281-tuflower-exato.jpg", alt: "Vestido Est. Tuflower — Graúna Moda", label: "Vestido" },
+  { id: 8, src: "/looks/macacao-21353-bege-exato.jpg", alt: "Macacão Bege — Graúna Moda", label: "Macacão" },
+  { id: 9, src: "/looks/blusa-21378-azul-exato.jpg", alt: "Conjunto Azul — Graúna Moda", label: "Conjunto" },
+  { id: 10, src: "/looks/blusa-10261-off-white-exato.jpg", alt: "Blusa Off White — Graúna Moda", label: "Blusa" },
+  { id: 11, src: "/looks/blusa-10279-tuflower-exato.jpg", alt: "Blusa Est. Tuflower — Graúna Moda", label: "Blusa" },
+  { id: 12, src: "/looks/blusa-10306-marrom-exato.jpg", alt: "Macacão Verde — Graúna Moda", label: "Macacão" },
+  { id: 13, src: "/looks/blusa-10307-marrom-exato.jpg", alt: "Conjunto Verde — Graúna Moda", label: "Conjunto" },
+  { id: 14, src: "/looks/camisa-21401-arado-exato.jpg", alt: "Camisa Estampa Arado — Graúna Moda", label: "Camisa" },
+  { id: 15, src: "/looks/calca-21242-arado-exato.jpg", alt: "Calça Estampa Arado — Graúna Moda", label: "Calça" },
 ] as const;
 
 export const BRANDS = [

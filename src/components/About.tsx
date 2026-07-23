@@ -35,17 +35,15 @@ export function About() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.9 }}
           className="relative overflow-hidden rounded-[2px]"
         >
           <img
-            src="/looks/blusa-21378-azul-origem.jpg"
+            src="/looks/blusa-21378-azul-exato.jpg"
             alt="Conjunto azul Graúna Moda"
-            width={2400}
-            height={3411}
             className="aspect-[4/5] w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/70 via-transparent to-transparent" />
