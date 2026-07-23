@@ -36,7 +36,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
           className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-cream-dim)] md:text-lg"
         >
           Vitrine editorial de moda feminina. Lookbook, marcas selecionadas e atendimento
-          exclusivo pelo WhatsApp.
+          exclusivo pelo WhatsApp ou loja física.
         </motion.p>
 
         <motion.div
