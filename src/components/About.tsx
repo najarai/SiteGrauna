@@ -45,7 +45,7 @@ export function About() {
           <img
             src="/looks/blusa-21378-azul-exato.jpg"
             alt="Conjunto azul Graúna Moda"
-            className="aspect-[4/5] w-full object-cover"
+            className="mx-auto h-auto w-full max-w-[528px]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)]/70 via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6 right-6">

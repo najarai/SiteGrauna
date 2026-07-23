@@ -14,30 +14,30 @@ function LookCard({
     target: ref,
     offset: ["start end", "end start"],
   });
-  // Translate only — CSS scale softens photos when the browser resamples them.
+  // Subtle translate only — no scale (keeps photo sharpness).
   const y = useTransform(
     scrollYProgress,
     [0, 1],
-    [index % 2 === 0 ? 28 : -20, index % 2 === 0 ? -28 : 20],
+    [index % 2 === 0 ? 16 : -12, index % 2 === 0 ? -16 : 12],
   );
 
   return (
     <motion.figure
       ref={ref}
       style={{ y }}
-      initial={{ opacity: 0, y: 36 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.05 }}
-      className="group relative overflow-hidden rounded-[2px]"
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: (index % 2) * 0.06 }}
+      className="group relative mx-auto w-full max-w-[528px]"
     >
       <img
         src={look.src}
         alt={look.alt}
-        loading={index < 6 ? "eager" : "lazy"}
+        loading={index < 4 ? "eager" : "lazy"}
         decoding="async"
-        fetchPriority={index < 4 ? "high" : "auto"}
-        className="w-full h-auto"
+        fetchPriority={index < 2 ? "high" : "auto"}
+        className="h-auto w-full"
       />
       <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/70 via-black/20 to-transparent p-4 opacity-0 transition duration-500 group-hover:opacity-100">
         <span className="font-display text-2xl italic">{look.label}</span>
@@ -51,11 +51,11 @@ function LookCard({
 
 export function Lookbook() {
   return (
-    <section id="colecao" className="relative px-5 py-24 md:px-8 md:py-32">
+    <section id="colecao" className="relative px-5 py-28 md:px-10 md:py-36">
       <div className="section-wash section-wash--ink" aria-hidden />
-      <div className="relative mx-auto max-w-7xl">
-        <div className="mb-14 flex flex-col gap-4 md:mb-20 md:flex-row md:items-end md:justify-between">
-          <div>
+      <div className="relative mx-auto max-w-5xl">
+        <div className="mb-16 flex flex-col gap-5 md:mb-24 md:flex-row md:items-end md:justify-between md:gap-12">
+          <div className="max-w-xl">
             <p className="mb-3 text-[0.7rem] tracking-[0.28em] uppercase text-[var(--color-terra)]">
               Lookbook
             </p>
@@ -63,15 +63,18 @@ export function Lookbook() {
               Novidades <span className="italic text-[var(--color-cream-dim)]">da vitrine</span>
             </h2>
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-[var(--color-cream-dim)] md:text-base">
+          <p className="max-w-sm text-sm leading-relaxed text-[var(--color-cream-dim)] md:text-base">
             Looks recentes do catálogo — Morena Rosa, Maria Valentina e mais. Só mostruário:
             escolha o que ama e fale conosco no WhatsApp.
           </p>
         </div>
 
-        <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+        <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16 md:gap-x-14 md:gap-y-20">
           {LOOKS.map((look, index) => (
-            <div key={look.id} className="mb-5 break-inside-avoid">
+            <div
+              key={look.id}
+              className={index % 2 === 1 ? "sm:mt-14 md:mt-20" : undefined}
+            >
               <LookCard look={look} index={index} />
             </div>
           ))}
