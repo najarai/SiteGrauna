@@ -13,7 +13,7 @@ export function Navbar({ ready = true }: { ready?: boolean }) {
     <motion.header
       initial={{ y: -24, opacity: 0 }}
       animate={ready ? { y: 0, opacity: 1 } : { y: -24, opacity: 0 }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-0 inset-x-0 z-30"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-8">

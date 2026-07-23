@@ -14,7 +14,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          transition={{ delay: 0.1, duration: 0.8 }}
+          transition={{ delay: 0.08, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
           className="mb-5 text-[0.72rem] tracking-[0.28em] uppercase text-[var(--color-terra)]"
         >
           {SITE.city}
@@ -23,7 +23,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
         <motion.h1
           initial={{ opacity: 0, y: 36 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-          transition={{ delay: 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.16, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="font-display max-w-4xl text-[clamp(3.2rem,9vw,7.2rem)] leading-[0.92] tracking-tight"
         >
           Graúna
@@ -33,7 +33,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.32, duration: 0.85 }}
+          transition={{ delay: 0.28, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-cream-dim)] md:text-lg"
         >
           Vitrine editorial de moda feminina. Lookbook, marcas selecionadas e atendimento
@@ -43,7 +43,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-          transition={{ delay: 0.45, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 flex flex-wrap gap-3"
         >
           <a href="#colecao" className="btn-primary">

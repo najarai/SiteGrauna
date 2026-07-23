@@ -21,9 +21,12 @@ export default function App() {
     <>
       <div className="grain" aria-hidden />
       <Intro onComplete={onIntroComplete} />
-      <Suspense fallback={null}>
-        <AtmosphereCanvas />
-      </Suspense>
+      {/* WebGL only after intro — avoids competing with intro frames */}
+      {entered && (
+        <Suspense fallback={null}>
+          <AtmosphereCanvas />
+        </Suspense>
+      )}
       <Navbar ready={entered} />
       <main className="scroll-root">
         <Hero ready={entered} />
