@@ -42,7 +42,7 @@ export function About() {
           className="relative overflow-hidden rounded-[2px]"
         >
           <img
-            src="/looks/blusa-21378-azul.jpg"
+            src="/looks/blusa-21378-azul-nativo.jpg"
             alt="Conjunto azul Graúna Moda"
             className="aspect-[4/5] w-full object-cover"
           />
