@@ -8,7 +8,7 @@ export const SITE = {
   instagram: "https://www.instagram.com/graunamoda/",
   instagramHandle: "@graunamoda",
   hoursNote: "Vitrines às terças e sextas",
-  serviceNote: "Atendimento exclusivamente por WhatsApp",
+  serviceNote: "Atendimento por WhatsApp e/ou loja",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Rua+Professor+Teixeira,+1480,+Centro,+Santa+Maria,+RS",
   mapsEmbedUrl:

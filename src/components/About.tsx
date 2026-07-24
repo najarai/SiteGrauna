@@ -16,8 +16,7 @@ export function About() {
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-cream-dim)]">
             A Graúna Moda é moda feminina com curadoria cuidadosa: peças que chegam às
-            vitrines às terças e sextas, e um atendimento próximo, feito exclusivamente
-            pelo WhatsApp.
+            vitrines às terças e sextas, e um atendimento próximo pelo WhatsApp e/ou loja.
           </p>
           <ul className="mt-8 space-y-3 text-sm text-[var(--color-cream)]">
             <li className="flex gap-3">
